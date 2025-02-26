@@ -29,8 +29,8 @@ class Data extends AbstractHelper
     public const XML_PATH_VALUES_PAGE_SIZE =
         'mageworx_apo/option_tricks/values_page_size';
 
-    public const DEFAULT_OPTIONS_PAGE_SIZE = 10;
-    public const DEFAULT_VALUES_PAGE_SIZE  = 10;
+    public const DEFAULT_OPTIONS_PAGE_SIZE = 20;
+    public const DEFAULT_VALUES_PAGE_SIZE  = 20;
     public const CLEAR_LOCAL_STORAGE_FLAG  = 'mageworx_apo_clear_local_storage';
 
     /**
