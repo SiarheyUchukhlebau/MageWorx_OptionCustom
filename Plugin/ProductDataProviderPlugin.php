@@ -5,36 +5,69 @@
  */
 declare(strict_types = 1);
 
-namespace MageWorx\OptionCustom\Plugin;
+namespace MageWorx\OptionCustomTricks\Plugin;
 
 use Magento\Catalog\Ui\DataProvider\Product\Form\ProductDataProvider;
+use MageWorx\OptionCustomTricks\Helper\Data as OptionCustomTricksHelper;
 
 class ProductDataProviderPlugin
 {
     /**
-     * Collapse custom options by modifying the meta configuration
+     * @var OptionCustomTricksHelper
+     */
+    private OptionCustomTricksHelper $helper;
+
+    /**
+     * @param OptionCustomTricksHelper $helper
+     */
+    public function __construct(
+        OptionCustomTricksHelper $helper
+    ) {
+        $this->helper = $helper;
+    }
+
+    /**
+     * Modify UI meta data for custom options:
+     * - Collapse options if enabled in admin settings
+     * - Set custom page size for options and values pagination
      *
      * @param ProductDataProvider $subject
      * @param array $result
      * @return array
      */
-    public function afterGetMeta(ProductDataProvider $subject, array $result)
+    public function afterGetMeta(ProductDataProvider $subject, array $result): array
     {
         $groupCustomOptionsName = 'custom_options';
         $optionContainerName    = 'record';
 
-        // Check if the meta contains custom options group
-        if (isset($result[$groupCustomOptionsName]['children']['options']['children'][$optionContainerName])) {
-            $record = &$result[$groupCustomOptionsName]['children']['options']['children'][$optionContainerName];
+        $optionsPageSize = $this->helper->getOptionsPageSize();
+        $valuesPageSize  = $this->helper->getValuesPageSize();
 
-            // Iterate through all options and collapse them
-            if (isset($record['children'])) {
-                foreach ($record['children'] as &$option) {
-                    if (isset($option['arguments']['data']['config'])) {
-                        $option['arguments']['data']['config']['collapsible'] = true;
-                        $option['arguments']['data']['config']['opened']      = false;
-                    }
+        if (!isset($result[$groupCustomOptionsName]['children']['options'])) {
+            return $result;
+        }
+
+        // name = product_form.product_form.custom_options.options
+        $options = &$result[$groupCustomOptionsName]['children']['options'];
+
+        if (!isset($options['children'][$optionContainerName]['children'])) {
+            return $result;
+        }
+
+        // Set page size for options dynamic rows
+        $options['arguments']['data']['config']['pageSize'] = $optionsPageSize;
+
+        $record = &$options['children'][$optionContainerName];
+
+        if (isset($record['children'])) {
+            foreach ($record['children'] as &$option) {
+                // Collapse custom options by modifying the meta configuration if enabled in admin settings.
+                if ($this->helper->isOptionsStateCollapsed()) {
+                    $option['arguments']['data']['config']['collapsible'] = true;
+                    $option['arguments']['data']['config']['opened']      = false;
                 }
+                // Set page size for values dynamic rows
+                $option['children']['values']['arguments']['data']['config']['pageSize'] = $valuesPageSize;
             }
         }
 

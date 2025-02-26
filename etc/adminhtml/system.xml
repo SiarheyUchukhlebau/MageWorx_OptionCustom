@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © MageWorx. All rights reserved.
+    See LICENSE.txt for license details.
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageworx">
+            <label>MageWorx</label>
+        </tab>
+        <section id="mageworx_apo" translate="label" type="text" sortOrder="10"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+            <label><![CDATA[Advanced Product Options]]></label>
+            <tab>mageworx</tab>
+            <resource>MageWorx_OptionFeatures::config_optionfeatures</resource>
+            <group id="option_tricks" translate="label" type="text" sortOrder="20"
+                   showInDefault="1">
+                <label><![CDATA[Option Tricks]]></label>
+                <field id="collapse_option_and_values_by_default" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1">
+                    <label><![CDATA[Collapse Custom Options and Values by Default in Admin Panel]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[When enabled, custom options and their values on the product edit page in the admin panel will be collapsed by default.
+                    This helps reduce the initial JavaScript rendering load, especially when a product has a large number of options.
+                    Options will only be rendered when expanded.]]>
+                    </comment>
+                </field>
+                <field id="options_page_size" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1">
+                    <label>Number of Custom Options per Page</label>
+                    <comment>Set the number of custom options displayed per page in the admin panel.</comment>
+                </field>
+                <field id="values_page_size" translate="label comment" type="text" sortOrder="15"
+                       showInDefault="1">
+                    <label>Number of Values per Page</label>
+                    <comment>Set the number of option values displayed per page in the admin panel.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

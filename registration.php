@@ -6,6 +6,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'MageWorx_OptionCustom',
+    'MageWorx_OptionCustomTricks',
     __DIR__
 );

@@ -1,0 +1,15 @@
+"Changes to Advanced Product Options require clearing local storage.
+             Please refresh the page to apply the changes correctly.","Changes to Advanced Product Options require clearing local storage.
+             Please refresh the page to apply the changes correctly."
+"Advanced Product Options","Advanced Product Options"
+"Option Tricks","Option Tricks"
+"Collapse Custom Options and Values by Default in Admin Panel","Collapse Custom Options and Values by Default in Admin Panel"
+"When enabled, custom options and their values on the product edit page in the admin panel will be collapsed by default.
+                    This helps reduce the initial JavaScript rendering load, especially when a product has a large number of options.
+                    Options will only be rendered when expanded.","When enabled, custom options and their values on the product edit page in the admin panel will be collapsed by default.
+                    This helps reduce the initial JavaScript rendering load, especially when a product has a large number of options.
+                    Options will only be rendered when expanded."
+"Number of Custom Options per Page","Number of Custom Options per Page"
+"Set the number of custom options displayed per page in the admin panel.","Set the number of custom options displayed per page in the admin panel."
+"Number of Values per Page","Number of Values per Page"
+"Set the number of option values displayed per page in the admin panel.","Set the number of option values displayed per page in the admin panel."
